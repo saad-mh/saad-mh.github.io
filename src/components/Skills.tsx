@@ -31,28 +31,28 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section className="py-20 bg-gray-900" id="skills">
+    <section className="py-20 bg-zinc-950" id="skills">
       <div className="container mx-auto px-4">
         <FadeInSection>
-          <h2 className="text-3xl font-bold text-center mb-16 text-gray-100">
+          <h2 className="text-3xl font-bold text-center mb-16 text-zinc-100">
             Technical Skills
           </h2>
         </FadeInSection>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skill, index) => (
             <FadeInSection key={index}>
-              <div className="p-6 rounded-xl bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700">
-                <div className="text-[#777FCF] mb-4">{skill.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-100">
+              <div className="p-6 rounded-lg bg-zinc-800 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-zinc-700">
+                <div className="text-[#777fcf] mb-4">{skill.icon}</div>
+                <h3 className="text-xl font-semibold mb-2 text-zinc-100">
                   {skill.category}
                 </h3>
                 <div className="space-y-2">
                   {skill.items.map((item, i) => (
-                    <p key={i} className="text-gray-300">{item}</p>
+                    <p key={i} className="text-zinc-300">{item}</p>
                   ))}
                 </div>
                 <div className="mt-4">
-                  <span className="text-sm font-medium text-[#777FCF]">
+                  <span className="text-sm font-medium text-[#777fcf]">
                     {skill.level}
                   </span>
                 </div>
