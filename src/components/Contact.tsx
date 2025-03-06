@@ -1,11 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import FadeInSection from './FadeInSection';
+import { supabase } from '../lib/supabase';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic would go here
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      console.log('Attempting to submit form data:', formData);
+      const { data, error } = await supabase
+        .from('contact_messages')
+        .insert([{
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          created_at: new Date().toISOString()
+        }])
+        .select();
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+
+      console.log('Form submission successful:', data);
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thank you for your message! I will get back to you soon.'
+      });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again later.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -28,7 +82,7 @@ export default function Contact() {
               </p>
               <div className="flex gap-4 mb-8">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/saad-mh"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-[#777FCF] transition-colors"
@@ -36,7 +90,7 @@ export default function Contact() {
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://linkedin.com/saadmm"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-[#777FCF] transition-colors"
@@ -44,7 +98,7 @@ export default function Contact() {
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="mailto:contact@example.com"
+                  href="mailto:hello@msaad.me"
                   className="text-gray-400 hover:text-[#777FCF] transition-colors"
                 >
                   <Mail className="w-6 h-6" />
@@ -54,6 +108,13 @@ export default function Contact() {
           </FadeInSection>
           <FadeInSection>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {submitStatus && (
+                <div
+                  className={`p-4 rounded-lg ${submitStatus.type === 'success' ? 'bg-green-800/50 text-green-100' : 'bg-red-800/50 text-red-100'}`}
+                >
+                  {submitStatus.message}
+                </div>
+              )}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   Name
@@ -61,6 +122,9 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#777FCF] focus:border-transparent text-gray-100"
                   required
                 />
@@ -72,6 +136,9 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#777FCF] focus:border-transparent text-gray-100"
                   required
                 />
@@ -82,6 +149,9 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#777FCF] focus:border-transparent text-gray-100"
                   required
@@ -89,9 +159,10 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="flex items-center gap-2 px-6 py-3 bg-[#777FCF] text-white rounded-lg hover:bg-[#656BB0] transition-colors"
+                disabled={isSubmitting}
+                className={`flex items-center gap-2 px-6 py-3 bg-[#777FCF] text-white rounded-lg transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#656BB0]'}`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <Send className="w-4 h-4" />
               </button>
             </form>
