@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import FadeInSection from './FadeInSection';
-import { supabase } from '../lib/supabase';
 
 interface ContactFormData {
   name: string;
@@ -23,49 +22,36 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+    const form = e.target as HTMLFormElement;
 
     try {
-      console.log('Form data:', formData);
-      console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
-      const { data, error } = await supabase
-        .from('contact_messages')
-        .insert([{
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.FORM3_ACCESS_TOKEN,
           name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          created_at: new Date().toISOString()
-        }])
-        .select();
-
-      if (error) {
-        console.error('Supabase error details:', {
-          message: error.message,
-          details: error.details,
-          hint: error.hint
-        });
-        throw error;
-      }
-
-      console.log('Form submission successful:', data);
-      setSubmitStatus({
-        type: 'success',
-        message: 'Thank you for your message! I will get back to you soon.'
+          email: form.email.value,
+          message: form.message.value
+        })
       });
-      setFormData({ name: '', email: '', message: '' });
+
+      const result = await response.json();
+      if (result.success) {
+        console.log('Form submitted successfully:', result);
+        form.reset();
+      } else {
+        console.error('Form submission failed:', result);
+      }
     } catch (error) {
       console.error('Form submission error:', error);
-      setSubmitStatus({
-        type: 'error',
-        message: error instanceof Error ? error.message : 'Failed to send message. Please try again later.'
-      });
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+  }
 
   return (
     <section className="py-20 bg-gray-900" id="contact">
@@ -113,13 +99,6 @@ export default function Contact() {
           </FadeInSection>
           <FadeInSection>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {submitStatus && (
-                <div
-                  className={`p-4 rounded-lg ${submitStatus.type === 'success' ? 'bg-green-800/50 text-green-100' : 'bg-red-800/50 text-red-100'}`}
-                >
-                  {submitStatus.message}
-                </div>
-              )}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   Name
@@ -128,10 +107,9 @@ export default function Contact() {
                   type="text"
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#777FCF] focus:border-transparent text-gray-100"
                   required
+                  placeholder="Your name"
                 />
               </div>
               <div>
@@ -142,10 +120,9 @@ export default function Contact() {
                   type="email"
                   id="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#777FCF] focus:border-transparent text-gray-100"
                   required
+                  placeholder="email@example.com"
                 />
               </div>
               <div>
@@ -155,19 +132,17 @@ export default function Contact() {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#777FCF] focus:border-transparent text-gray-100"
                   required
+                  placeholder="Enter Message"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`flex items-center gap-2 px-6 py-3 bg-[#777FCF] text-white rounded-lg transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#656BB0]'}`}
+                className="flex items-center gap-2 px-6 py-3 bg-[#777FCF] text-white rounded-lg transition-colors hover:bg-[#656BB0]"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                Send Message
                 <Send className="w-4 h-4" />
               </button>
             </form>
