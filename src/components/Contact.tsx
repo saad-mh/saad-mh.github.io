@@ -29,7 +29,8 @@ export default function Contact() {
     setSubmitStatus(null);
 
     try {
-      console.log('Attempting to submit form data:', formData);
+      console.log('Form data:', formData);
+      console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
       const { data, error } = await supabase
         .from('contact_messages')
         .insert([{
@@ -41,7 +42,11 @@ export default function Contact() {
         .select();
 
       if (error) {
-        console.error('Supabase error:', error);
+        console.error('Supabase error details:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint
+        });
         throw error;
       }
 
