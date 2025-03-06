@@ -5,21 +5,21 @@ import FadeInSection from './FadeInSection';
 const educationHistory = [
   {
     level: 'Bachelor of Technology',
-    institution: 'University 1',
+    institution: 'Amity University Kolkata',
     period: 'Sep 2023 - Ongoing',
     score: null,
     current: true
   },
   {
     level: 'Secondary Education',
-    institution: 'School 2',
+    institution: 'DAV Public School Bishnupur',
     period: 'Aug 2021 - Apr 2023',
     score: '75 percentile',
     current: false
   },
   {
     level: 'Primary Education',
-    institution: 'School 1',
+    institution: 'Kharagpur Vision Academy',
     period: 'Aug 2019 - Apr 2021',
     score: '85.1 percentile',
     current: false
@@ -29,8 +29,13 @@ const educationHistory = [
 const certifications = [
   {
     name: 'Python Mastery Certificate',
-    url: '#',
+    url: 'https://www.hackerrank.com/certificates/eb7e4352921b',
     platform: 'Example Platform 1'
+  },
+  {
+    name: 'SQL Certificate',
+    url: '#',
+    platform: 'Example Platform 2'
   },
   {
     name: 'SQL Certificate',
