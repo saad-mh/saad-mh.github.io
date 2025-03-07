@@ -31,12 +31,12 @@ const certifications = [
   {
     name: 'Python Mastery Certificate',
     url: 'https://www.hackerrank.com/certificates/eb7e4352921b',
-    platform: 'Example Platform 1'
+    platform: 'Hackerrank'
   },
   {
-    name: 'SQL Certificate',
-    url: '#',
-    platform: 'Example Platform 2'
+    name: 'Problem Solving (Basic) Certificate',
+    url: 'https://www.hackerrank.com/certificates/324861a6db5b',
+    platform: 'Hackerrank'
   },
   {
     name: 'SQL Certificate',
@@ -47,7 +47,7 @@ const certifications = [
 
 export default function Education() {
   return (
-    <section className="py-20 bg-zinc-900" id="education">
+    <section className="py-20 bg-zinc-950" id="education">
       <div className="container mx-auto px-4">
         <FadeInSection>
           <h2 className="text-3xl font-bold text-center mb-16 text-zinc-100">

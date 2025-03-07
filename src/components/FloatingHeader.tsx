@@ -6,39 +6,49 @@ export default function FloatingHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.getElementById('hero');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.intersectionRatio < 0.40);
+      },
+      {
+        threshold: 0.40,
+        rootMargin: '0px'
+      }
+    );
+
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+
+    return () => {
       if (heroSection) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        setIsVisible(heroBottom < 0);
+        observer.unobserve(heroSection);
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
+    { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Education', href: '#skills' },
     { name: 'Contact', href: '#contact' }
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 bg-[#777fcf]/10 backdrop-blur-sm border-b border-[#777fcf]/20 z-50 transition-all duration-300 ${
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}
     >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-xl font-bold text-gray-100">
+          <a href="#" className="text-xl font-bold text-[#777fcf]">
             Mohammed Saad
           </a>
           
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-gray-100 hover:text-[#777FCF] transition-colors"
+            className="md:hidden text-[#777fcf] hover:text-[#777fcf]/80 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <Menu className="w-6 h-6" />
@@ -50,7 +60,7 @@ export default function FloatingHeader() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-[#777FCF] transition-colors"
+                className="text-[#777fcf]/60 hover:text-[#777fcf] transition-colors"
               >
                 {item.name}
               </a>
@@ -69,7 +79,7 @@ export default function FloatingHeader() {
               <a
                 key={item.name}
                 href={item.href}
-                className="block text-gray-300 hover:text-[#777FCF] transition-colors py-2"
+                className="block text-[#777fcf]/60 hover:text-[#777fcf] transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}

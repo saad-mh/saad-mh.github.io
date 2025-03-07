@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wallet, Code2, Sparkles } from 'lucide-react';
+import { Wallet, Code2, Sparkles, ExternalLink } from 'lucide-react';
 import FadeInSection from './FadeInSection';
 import { Button } from "./ui/button";
 
@@ -9,21 +9,24 @@ const projects = [
     description: "Finance Analytics and Planning Application with advanced data visualization and predictive analytics.",
     technologies: ["Expo", "React", "TensorFlow"],
     status: "In Progress",
-    icon: <Wallet className="w-6 h-6" />
+    icon: <Wallet className="w-6 h-6" />,
+    url: "#"
   },
   {
     name: "Nova",
     description: "Coming soon - An innovative mobile application focused on productivity.",
     technologies: ["Flutter", "Firebase"],
     status: "In Progress",
-    icon: <Sparkles className="w-6 h-6" />
+    icon: <Sparkles className="w-6 h-6" />,
+    url: "#"
   },
   {
     name: "CodeVault",
     description: "Coming soon - A secure code sharing and collaboration platform.",
     technologies: ["TypeScript", "Node.js"],
     status: "Planning",
-    icon: <Code2 className="w-6 h-6" />
+    icon: <Code2 className="w-6 h-6" />,
+    url: "#"
   }
 ];
 
@@ -57,14 +60,23 @@ export default function Projects() {
                     </Button>
                   ))}
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center justify-between">
                   <Button
-                    variant="outline"
+                    variant="default"
                     size="sm"
-                    className={`rounded-full ${project.status === "Completed" ? "bg-green-900/20 text-green-300 hover:bg-green-900/30" : "bg-yellow-900/20 text-yellow-300 hover:bg-yellow-900/30"}`}
+                    className={`rounded-full cursor-default ${project.status === "Completed" ? "bg-green-900/20 text-green-300 hover:bg-green-900/30" : "bg-yellow-900/20 text-yellow-300 hover:bg-yellow-900/30"}`}
                   >
                     {project.status}
                   </Button>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[#777fcf] hover:text-[#5a62b5] transition-colors"
+                  >
+                    <span>View Project</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
             </FadeInSection>
