@@ -37,11 +37,6 @@ const certifications = [
     name: 'Problem Solving (Basic) Certificate',
     url: 'https://www.hackerrank.com/certificates/324861a6db5b',
     platform: 'Hackerrank'
-  },
-  {
-    name: 'SQL Certificate',
-    url: '#',
-    platform: 'Example Platform 2'
   }
 ];
 
