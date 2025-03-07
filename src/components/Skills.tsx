@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrainCircuit, Code, Smartphone, Laptop, GitBranch, Parentheses, MonitorSmartphone, Apple } from 'lucide-react';
+import { BrainCircuit, Code, Smartphone, Laptop, GitBranch, Parentheses, MonitorSmartphone, Apple, Component, Gamepad2 } from 'lucide-react';
 import FadeInSection from './FadeInSection';
 
 const skills = [
@@ -25,7 +25,9 @@ const skills = [
       { name: "Git", icon: <GitBranch className="w-6 h-6" /> },
       { name: "VS Code", icon: <Laptop className="w-6 h-6" /> },
       { name: "Android Studio", icon: <Smartphone className="w-6 h-6" /> },
-      { name: "Xcode", icon: <Smartphone className="w-6 h-6" /> }
+      { name: "Xcode", icon: <Smartphone className="w-6 h-6" /> },
+      { name: "TouchDesigner", icon: <Component className="w-6 h-6" /> },
+      { name: "Unity" , icon: <Gamepad2 className="w-6 h-6" /> },
     ]
   }
 ];
@@ -42,11 +44,11 @@ export default function Skills() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((skillGroup, index) => (
             <FadeInSection key={index}>
-              <div className="p-6 rounded-lg bg-zinc-800 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-zinc-700">
+              <div className="p-6 rounded-lg bg-zinc-800 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-zinc-700 h-full">
                 <h3 className="text-xl font-semibold mb-4 text-zinc-100">
                   {skillGroup.category}
                 </h3>
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 gap-4">
                   {skillGroup.items.map((skill, i) => (
                     <div key={i} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
