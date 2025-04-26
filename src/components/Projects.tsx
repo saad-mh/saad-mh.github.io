@@ -10,7 +10,7 @@ const projects = [
     technologies: ["SwiftUI", "SwiftData"],
     status: "In Progress",
     icon: <Wallet className="w-6 h-6" />,
-    url: "#"
+    url: ""
   },
   {
     name: "Nova",
@@ -18,7 +18,7 @@ const projects = [
     technologies: ["Flutter", "Firebase"],
     status: "In Progress",
     icon: <Sparkles className="w-6 h-6" />,
-    url: "#"
+    url: ""
   },
   {
     name: "Research Co-Author",
