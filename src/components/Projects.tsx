@@ -22,7 +22,7 @@ const projects = [
   },
   {
     name: "Research Co-Author",
-    description: "A research paper on the topic of 'Using simulations to study the interaction between Autonomous Vehicles and Pedestrians'.",
+    description: "A research paper on the topic of 'Enhancing Human-Automated Vehicle Interaction in Complex Environments Using VR and XR Technologies' as a chapter on the book 'Driving Smarter Human-Computer Interaction With Multidisciplinary Personalized Systems' to be published by IGI Global.",
     technologies: ["Unity", "TensorFlow", "Python"],
     status: "Completed",
     icon: <Sparkles className="w-6 h-6" />,
