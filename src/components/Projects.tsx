@@ -21,10 +21,10 @@ const projects = [
     url: "#"
   },
   {
-    name: "Nova",
-    description: "Coming soon - An innovative mobile application focused on productivity.",
-    technologies: ["Flutter", "Firebase"],
-    status: "In Progress",
+    name: "Research Co-Author",
+    description: "A research paper on the topic of 'Using simulations to study the interaction between Autonomous Vehicles and Pedestrians'.",
+    technologies: ["Unity", "TensorFlow", "Python"],
+    status: "Completed",
     icon: <Sparkles className="w-6 h-6" />,
     url: "#"
   },
@@ -76,7 +76,7 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     // className="inline-flex items-center gap-2 text-[#777fcf] hover:text-[#5a62b5] transition-colors"
                   >
-                    <span>{project.status === "Completed" ? "View Project" : "i pretty dum"}</span>
+                    <span>{project.status === "Completed" ? "View Project" : "wait"}</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
