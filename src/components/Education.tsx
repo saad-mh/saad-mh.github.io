@@ -37,6 +37,11 @@ const certifications = [
     name: 'Problem Solving (Basic) Certificate',
     url: 'https://www.hackerrank.com/certificates/324861a6db5b',
     platform: 'Hackerrank'
+  },
+  {
+    name: 'Prompt Design in Vertex AI Skill',
+    url: 'https://www.credly.com/badges/96aa5a80-76ba-41f8-9a34-4cff5e597221/public_url',
+    platform: 'Hackerrank'
   }
 ];
 
