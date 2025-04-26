@@ -25,7 +25,7 @@ const skills = [
       { name: "Git", icon: <GitBranch className="w-6 h-6" /> },
       { name: "VS Code", icon: <Laptop className="w-6 h-6" /> },
       { name: "Android Studio", icon: <Smartphone className="w-6 h-6" /> },
-      { name: "Xcode", icon: <Smartphone className="w-6 h-6" /> },
+      { name: "XCode", icon: <Smartphone className="w-6 h-6" /> },
       { name: "TouchDesigner", icon: <Component className="w-6 h-6" /> },
       { name: "Unity" , icon: <Gamepad2 className="w-6 h-6" /> },
     ]
