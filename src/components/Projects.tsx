@@ -20,6 +20,14 @@ const projects = [
     icon: <Sparkles className="w-6 h-6" />,
     url: "#"
   },
+  {
+    name: "Nova",
+    description: "Coming soon - An innovative mobile application focused on productivity.",
+    technologies: ["Flutter", "Firebase"],
+    status: "In Progress",
+    icon: <Sparkles className="w-6 h-6" />,
+    url: "#"
+  },
 
 ];
 
@@ -62,12 +70,13 @@ export default function Projects() {
                     {project.status}
                   </Button>
                   <a
-                    href={project.url}
+                    href={project.status === "Completed" ? project.url : "#"}
+                    className={`text-sm font-medium ${project.status === "Completed" ? "text-[#777fcf] hover:text-[#5a62b5]" : "text-gray-500 cursor-not-allowed"}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#777fcf] hover:text-[#5a62b5] transition-colors"
+                    // className="inline-flex items-center gap-2 text-[#777fcf] hover:text-[#5a62b5] transition-colors"
                   >
-                    <span>View Project</span>
+                    <span>{project.status === "Completed" ? "View Project" : "i pretty dum"}</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
