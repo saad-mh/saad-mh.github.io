@@ -20,14 +20,7 @@ const projects = [
     icon: <Sparkles className="w-6 h-6" />,
     url: "#"
   },
-  {
-    name: "CodeVault",
-    description: "Coming soon - A secure code sharing and collaboration platform.",
-    technologies: ["TypeScript", "Node.js"],
-    status: "Planning",
-    icon: <Code2 className="w-6 h-6" />,
-    url: "#"
-  }
+
 ];
 
 export default function Projects() {
