@@ -7,7 +7,7 @@ const projects = [
   {
     name: "Zenith",
     description: "Finance Analytics and Planning Application with advanced data visualization and predictive analytics.",
-    technologies: ["Expo", "React", "TensorFlow"],
+    technologies: ["SwiftUI", "SwiftData"],
     status: "In Progress",
     icon: <Wallet className="w-6 h-6" />,
     url: "#"
