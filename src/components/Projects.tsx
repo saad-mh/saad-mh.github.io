@@ -71,7 +71,7 @@ export default function Projects() {
                   </Button>
                   <a
                     href={project.status === "Completed" ? project.url : "#"}
-                    className={`text-sm font-medium ${project.status === "Completed" ? "text-[#777fcf] hover:text-[#5a62b5]" : "text-gray-500 cursor-not-allowed"}`}
+                    className={`inline-flex items-center gap-2 text-sm font-medium ${project.status === "Completed" ? "text-[#777fcf] hover:text-[#5a62b5]" : "text-gray-500 cursor-not-allowed"}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     // className="inline-flex items-center gap-2 text-[#777fcf] hover:text-[#5a62b5] transition-colors"
